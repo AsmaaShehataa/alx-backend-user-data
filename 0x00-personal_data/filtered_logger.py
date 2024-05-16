@@ -2,7 +2,7 @@
 """0. Regex-ing"""
 
 import re
-import os
+from os import getenv
 import logging
 from typing import List
 import mysql.connector
