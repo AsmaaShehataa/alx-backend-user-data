@@ -43,9 +43,11 @@ def forbidden(error) -> str:
     return jsonify({"error": "Forbidden"}), 403
 
 
-@app.before_request()
+@app.before_request
 def before_request():
-    """Before request"""
+    """
+    handler before_request
+    """
     authorized_list = ['/api/v1/status',
                        '/api/v1/unauthorized/', '/api/v1/forbidden']
 

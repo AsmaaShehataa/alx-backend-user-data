@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
-""" Module of Auth views
-"""
-
+""" Auth module """
 from flask import request
 from typing import List, TypeVar
 from models.user import User
 
 
 class Auth:
-    """ Auth class
-    """
+    """ class auth for authenticating users"""
+
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """ require auth function that returns false"""
         if excluded_paths and path:
@@ -35,13 +33,15 @@ class Auth:
             return True
 
     def authorization_header(self, request=None) -> str:
-        """ authorization_header
-        """
-        if request is None or 'Authorization' not in request.headers:
+        """ authorization header"""
+        if request is None:
             return None
-        return request.headers['Authorization']
+        authorization = request.headers.get('Authorization')
+        if authorization is None:
+            return None
+        else:
+            return authorization
 
     def current_user(self, request=None) -> TypeVar('User'):
-        """ current_user
-        """
+        """ return current user else None"""
         return None
