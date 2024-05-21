@@ -50,6 +50,9 @@ def before_request():
     """
     handler before_request
     """
+    if auth is not None:
+        return
+
     authorized_list = ['/api/v1/status',
                        '/api/v1/unauthorized/', '/api/v1/forbidden']
 
