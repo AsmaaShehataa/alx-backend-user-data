@@ -5,15 +5,15 @@ from typing import List, TypeVar
 
 
 class Auth:
-    ''' API Auth class
-    '''
+    """ API Auth class
+    """
     def require_auth(
             self,
             path: str,
             excluded_paths: List[str]
             ) -> bool:
-        ''' Required auth
-        '''
+        """ Required auth
+        """
         if path is None:
             return True
         elif excluded_paths is None or excluded_paths == []:
@@ -32,13 +32,20 @@ class Auth:
         return True
 
     def authorization_header(self, request=None) -> str:
-        ''' Header authorization
-        '''
+        """ Header authorization
+        """
         if request is None:
             return None
         return request.headers.get('Authorization')
 
     def current_user(self, request=None) -> TypeVar('User'):
-        ''' Current user
-        '''
+        """ Current user
+        """
         return None
+
+    def session_cookie(self, request=None) -> str:
+        """ Session cookie
+        """
+        if request is None:
+            return None
+        return request.cookies.get('session_id')
