@@ -8,6 +8,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from typing import TypeVar
 from user import Base, User
+from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import InvalidRequestError
 
 
 class DB:
@@ -35,12 +37,10 @@ class DB:
         """
         Adds a new user to the Database.
         """
-        try:
-            new_user = User(email=email, hashed_password=hashed_password)
-            self._session.add(new_user)
-            self._session.commit()
-        except Exception:
-            self._session.rollback()
-            new_user = None
-
-        return new_user
+        if not email or not hashed_password:
+            return
+        user = User(email=email, hashed_password=hashed_password)
+        session = self._session
+        session.add(user)
+        session.commit()
+        return user
