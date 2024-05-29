@@ -35,7 +35,7 @@ class DB:
         """Add a user to the database using sqlalchemy
         """
         if not email or not hashed_password:
-            return None
+            return
         user = User(email=email, hashed_password=hashed_password)
         session = self._session
         session.add(user)
