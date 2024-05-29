@@ -32,7 +32,7 @@ class DB:
         return self.__session
 
     def add_user(self, email: str, hashed_password: str) -> User:
-        """Add a user to the database
+        """Add a user to the database using sqlalchemy
         """
         if not email or not hashed_password:
             return None
